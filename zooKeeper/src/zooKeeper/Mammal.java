@@ -9,6 +9,12 @@ public class Mammal {
 		energyLevel = 100;	
 	}
 	
+	public Mammal(int batHealth) {
+		//set default values
+		energyLevel = batHealth;	
+	}
+	
+	
 	public int getEnergyLevel() {
 		return this.energyLevel;
 	}
