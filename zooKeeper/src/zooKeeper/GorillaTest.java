@@ -8,10 +8,10 @@ public class GorillaTest {
 //		Brook.eatBananas();
 //		Brook.eatBananas();
 //		Brook.climb();
-		Bat Dracula = new Bat(300);
-		Dracula.attackTown();
-		Dracula.eatHumans();
-		Dracula.fly();
+		Bat dracula = new Bat();
+		dracula.attackTown();
+		dracula.eatHumans();
+		dracula.fly();
 	}
 
 }
