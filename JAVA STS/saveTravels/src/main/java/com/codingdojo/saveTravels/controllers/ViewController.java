@@ -7,11 +7,14 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingdojo.saveTravels.models.Expense;
 import com.codingdojo.saveTravels.services.ExpenseService;
@@ -54,6 +57,31 @@ public class ViewController {
 		Expense thisExpense = expenseService.findExpense(id);
 		model.addAttribute("thisExpense", thisExpense);
 		return "edit.jsp";
+	}
+	
+	@GetMapping("/show/{id}") 
+	public String showOne(@PathVariable("id") Long id, Model model) {
+		Expense thisExpense = expenseService.findExpense(id);
+		model.addAttribute("thisExpense", thisExpense);
+		return "showOne.jsp";
+	}
+	
+	@PutMapping("edit/{id}")
+	public String update(@Valid @ModelAttribute("thisExpense") Expense editedExpense, BindingResult result) {
+		if (result.hasErrors()) {
+			return "edit.jsp";
+		}
+		else {
+			expenseService.updateExpense(editedExpense);
+			return "redirect:/";
+		}
+	}
+	
+	@DeleteMapping ("/{id}")
+	public String destroy(@PathVariable ("id") Long id, RedirectAttributes flash) {
+		expenseService.deleteExpense(id);
+		flash.addFlashAttribute ("deleteSuccess", "Expense has been deleted!");
+		return "redirect:/";
 	}
 
 }

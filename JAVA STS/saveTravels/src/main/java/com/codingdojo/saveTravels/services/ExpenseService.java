@@ -36,4 +36,28 @@ public class ExpenseService {
 			return null;
 		}
 	}
+	
+	//UPDATE
+	public Expense updateExpense(Expense b) {
+		return expenseRepository.save(b);
+	}
+	
+	//DELETE
+	public void deleteExpense(Long id) {
+		expenseRepository.deleteById(id);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
